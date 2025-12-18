@@ -1,38 +1,35 @@
 SERVER_NAME = server
-# CLIENT_NAME = client
+CLIENT_NAME = client
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-SERVER_SRCS = main.c
+SERVER_SRCS = src/server.c
+CLIENT_SRCS = src/client.c
 
-# BONUS = 
-
-OBJS = $(SERVER_SRCS:.c=.o)
-# BONUS_OBJS = $(BONUS:.c=.o)
+SERVER_OBJS = $(SERVER_SRCS:.c=.o)
+CLIENT_OBJS = $(CLIENT_SRCS:.c=.o)
 LIBFT = libft/libft.a
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-all: $(SERVER_NAME)
+all: $(SERVER_NAME) $(CLIENT_NAME)
 
 $(LIBFT):
 	make -C libft
 
-$(SERVER_NAME): $(LIBFT) $(OBJS)
-	$(CC) $(OBJS) $(LIBFT) -o $(SERVER_NAME)
+$(SERVER_NAME): $(LIBFT) $(SERVER_OBJS)
+	$(CC) $(SERVER_OBJS) $(LIBFT) -o $(SERVER_NAME)
 
-# $(BONUS_NAME): $(LIBFT) $(BONUS_OBJS)
-# 	$(CC) $(BONUS_OBJS) $(LIBFT) -o $(BONUS_NAME)
-
-# bonus: $(BONUS_NAME)
+$(CLIENT_NAME): $(LIBFT) $(CLIENT_OBJS)
+	$(CC) $(CLIENT_OBJS) $(LIBFT) -o $(CLIENT_NAME)
 
 clean:
-	rm -f $(OBJS)
+	rm -f $(SERVER_OBJS) $(CLIENT_OBJS)
 	make -C libft clean
 
 fclean: clean
-	rm -f $(SERVER_NAME)
+	rm -f $(SERVER_NAME) $(CLIENT_NAME)
 	make -C libft fclean
 
 re: fclean all
