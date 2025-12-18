@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmustone <mmustone@student.42.fr>          +#+  +:+       +#+        */
+/*   By: martinmust <martinmust@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 13:30:38 by mmustone          #+#    #+#             */
-/*   Updated: 2025/12/18 15:12:56 by mmustone         ###   ########.fr       */
+/*   Updated: 2025/12/19 00:34:50 by martinmust       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minitalk.h"
 
-void	send_byte(unsigned char c, int pid)
+void	send_byte(unsigned char c, pid_t pid)
 {
 	int	i;
 	int	bit;
@@ -30,7 +30,20 @@ void	send_byte(unsigned char c, int pid)
 	}
 }
 
-int	pid_atoi(const char *str)
+void	cut_msg(char *msg, pid_t pid)
+{
+	int	i;
+
+	i = 0;
+	while (msg[i])
+	{
+		send_byte(msg[i], pid);
+		i++;
+	}
+	send_byte('\0', pid);
+}
+
+pid_t	pid_atoi(const char *str)
 {
 	long	result;
 
@@ -43,20 +56,18 @@ int	pid_atoi(const char *str)
 	{
 		result = (result * 10) + (*str - '0');
 		if (result > INT_MAX || result < 0)
-			return (0);
+			return ((pid_t)0);
 		str++;
 	}
 	if (*str != '\0')
 		return (0);
-	return ((int)(result));
+	return ((pid_t)(result));
 }
 
 int	main(int ac, char **av)
 {
-	int	pid;
-	int	i;
+	pid_t	pid;
 
-	i = 0;
 	if (ac != 3)
 	{
 		ft_printf("Error\nUsage: ./client <PID_SERVER> <text>\n");
@@ -68,11 +79,6 @@ int	main(int ac, char **av)
 		ft_printf("Error\nPID incorrect\n");
 		return (1);
 	}
-	while (av[2][i])
-	{
-		send_byte(av[2][i], pid);
-		i++;
-	}
-	send_byte('\0', pid);
+	cut_msg(av[2], pid);
 	return (0);
 }
