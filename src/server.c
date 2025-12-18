@@ -6,7 +6,7 @@
 /*   By: mmustone <mmustone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 17:34:02 by mmustone          #+#    #+#             */
-/*   Updated: 2025/12/18 14:54:29 by mmustone         ###   ########.fr       */
+/*   Updated: 2025/12/18 15:13:02 by mmustone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ void	signal_action(int sig)
 	steps++;
 	if (steps == 8)
 	{
-        if(bytes == '\0')
-            write(1, "\n", 1);
-        else
-            write(1, &bytes, 1);
+		if (bytes == '\0')
+			write(1, "\n", 1);
+		else
+			write(1, &bytes, 1);
 		steps = 0;
 		bytes = 0;
 	}

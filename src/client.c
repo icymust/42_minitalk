@@ -6,19 +6,22 @@
 /*   By: mmustone <mmustone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 13:30:38 by mmustone          #+#    #+#             */
-/*   Updated: 2025/12/18 14:16:43 by mmustone         ###   ########.fr       */
+/*   Updated: 2025/12/18 15:12:56 by mmustone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minitalk.h"
 
-void send_byte(unsigned char c, int pid){
-	int i = 0;
-	int bit;
+void	send_byte(unsigned char c, int pid)
+{
+	int	i;
+	int	bit;
 
-	while(i<8){
+	i = 0;
+	while (i < 8)
+	{
 		bit = (c >> (7 - i)) & 1;
-		if(bit == 0)
+		if (bit == 0)
 			kill(pid, SIGUSR1);
 		else
 			kill(pid, SIGUSR2);
@@ -51,8 +54,9 @@ int	pid_atoi(const char *str)
 int	main(int ac, char **av)
 {
 	int	pid;
-	int i = 0;
+	int	i;
 
+	i = 0;
 	if (ac != 3)
 	{
 		ft_printf("Error\nUsage: ./client <PID_SERVER> <text>\n");
@@ -64,7 +68,8 @@ int	main(int ac, char **av)
 		ft_printf("Error\nPID incorrect\n");
 		return (1);
 	}
-	while(av[2][i]){
+	while (av[2][i])
+	{
 		send_byte(av[2][i], pid);
 		i++;
 	}
