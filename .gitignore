@@ -1,4 +1,6 @@
 *.o
 libft.a
 client
+client_bonus
 server
+server_bonus
