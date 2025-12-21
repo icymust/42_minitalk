@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmustone <mmustone@student.42.fr>          +#+  +:+       +#+        */
+/*   By: martinmust <martinmust@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 17:34:02 by mmustone          #+#    #+#             */
-/*   Updated: 2025/12/18 15:13:02 by mmustone         ###   ########.fr       */
+/*   Updated: 2025/12/21 13:58:21 by martinmust       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,6 @@ int	main(void)
 	pid_t	pid;
 
 	pid = getpid();
-	if (pid < 0)
-	{
-		ft_printf("Error PID\n");
-		return (0);
-	}
 	ft_printf("Process ID: %d\n", pid);
 	signal(SIGUSR1, signal_action);
 	signal(SIGUSR2, signal_action);

@@ -6,7 +6,7 @@
 /*   By: martinmust <martinmust@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 01:19:28 by martinmust        #+#    #+#             */
-/*   Updated: 2025/12/20 00:43:59 by martinmust       ###   ########.fr       */
+/*   Updated: 2025/12/21 13:58:27 by martinmust       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,6 @@ int	main(void)
 	sa.sa_flags = SA_SIGINFO;
 	sigemptyset(&sa.sa_mask);
 	pid = getpid();
-	if (pid < 0)
-	{
-		ft_printf("Error PID\n");
-		return (0);
-	}
 	ft_printf("Process ID: %d\n", pid);
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);

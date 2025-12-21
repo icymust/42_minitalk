@@ -6,7 +6,7 @@
 /*   By: martinmust <martinmust@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 01:19:23 by martinmust        #+#    #+#             */
-/*   Updated: 2025/12/20 00:42:43 by martinmust       ###   ########.fr       */
+/*   Updated: 2025/12/21 14:02:01 by martinmust       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ pid_t	pid_atoi(const char *str)
 	while (*str == ' ' || (*str >= 9 && *str <= 13))
 		str++;
 	if (*str < '0' || *str > '9')
-		return (0);
+		return ((pid_t)0);
 	while (*str >= '0' && *str <= '9')
 	{
 		result = (result * 10) + (*str - '0');
