@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: martinmust <martinmust@student.42.fr>      +#+  +:+       +#+        */
+/*   By: mmustone <mmustone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 17:34:02 by mmustone          #+#    #+#             */
-/*   Updated: 2025/12/21 13:58:21 by martinmust       ###   ########.fr       */
+/*   Updated: 2025/12/22 14:28:43 by mmustone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,24 @@ void	signal_action(int sig)
 {
 	int						bit;
 	static int				steps;
-	static unsigned char	bytes;
+	static unsigned char	byte;
 
 	bit = 0;
 	if (sig == SIGUSR1)
 		bit = 0;
 	else if (sig == SIGUSR2)
 		bit = 1;
-	bytes = bytes << 1;
-	bytes = bytes | bit;
+	byte = byte << 1;
+	byte = byte | bit;
 	steps++;
 	if (steps == 8)
 	{
-		if (bytes == '\0')
+		if (byte == '\0')
 			write(1, "\n", 1);
 		else
-			write(1, &bytes, 1);
+			write(1, &byte, 1);
 		steps = 0;
-		bytes = 0;
+		byte = 0;
 	}
 }
 
